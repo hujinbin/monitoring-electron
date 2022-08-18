@@ -1,0 +1,25 @@
+{
+  "name": "monitoring-electron",
+  "version": "1.0.0",
+  "description": "监控桌面端工具",
+  "scripts": {
+    "start": "electron .",
+    "dev": "npm run start",
+    "build": "electron-builder"
+  },
+  "main": "main.js",
+  "devDependencies": {
+    "electron": "^20.0.1",
+    "electron-builder": "^23.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hujinbin/monitoring-electron.git"
+  },
+  "author": "hujinbin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hujinbin/monitoring-electron/issues"
+  },
+  "homepage": "https://github.com/hujinbin/monitoring-electron#readme"
+}
