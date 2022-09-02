@@ -5,7 +5,7 @@ const path = require('path')
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1240,
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
@@ -15,6 +15,17 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
 
+  mainWindow.webContents.session.webRequest.onHeadersReceived({ urls: [ "*://*/*" ] },
+    (d, c)=>{
+      if(d.responseHeaders['X-Frame-Options']){
+        delete d.responseHeaders['X-Frame-Options'];
+      } else if(d.responseHeaders['x-frame-options']) {
+        delete d.responseHeaders['x-frame-options'];
+      }
+ 
+      c({cancel: false, responseHeaders: d.responseHeaders});
+    }
+  );
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }

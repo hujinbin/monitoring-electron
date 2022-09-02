@@ -3,18 +3,23 @@
   <head>
     <meta charset="UTF-8">
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
     <link href="./styles.css" rel="stylesheet">
-    <title>Hello World!</title>
+    <title>monitoring-electron</title>
   </head>
   <body>
     <div id="container" style="width:100%">
-      <input id="input" style="width:100%">
+      <div class="header">
+        <input class="search-input" id="search-input" placeholder="请输入url访问">
+        <button class="search-btn" onclick="onSearch()">搜索</button>
+      </div>
       <iframe id="iframe" width="100%"
-        src="https://www.baidu.com/"
+        src="https://ops.ydctml.top/"
         frameborder="0"
         onload="changeFrameHeight()">
       </iframe>
+      <div class="">
+
+      </div>
     </div>
 
     <!-- You can also require other files to run in this process -->

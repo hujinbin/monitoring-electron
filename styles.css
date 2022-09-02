@@ -5,3 +5,26 @@
     margin: 0;
     padding: 0;
 }
+
+.header{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    margin-bottom: 6px;
+}
+
+.header .search-input{
+    flex: 1;
+    height: 38px;
+    outline: none;
+    box-shadow: none;
+}
+.header .search-btn{
+    height: 40px;
+    background: #4e6ef2;
+    color: #ffffff;
+    outline: none;
+    box-shadow: none;
+    border: none;
+    width: 60px;
+}
