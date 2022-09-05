@@ -6,6 +6,17 @@
     padding: 0;
 }
 
+input{
+    outline: none;
+    box-shadow: none;
+}
+button{
+    outline: none;
+    box-shadow: none;
+    border: none;
+    cursor: pointer;
+}
+
 .header{
     display: flex;
     align-items: center;
@@ -16,15 +27,54 @@
 .header .search-input{
     flex: 1;
     height: 38px;
-    outline: none;
-    box-shadow: none;
 }
 .header .search-btn{
     height: 40px;
     background: #4e6ef2;
     color: #ffffff;
-    outline: none;
-    box-shadow: none;
-    border: none;
     width: 60px;
+}
+
+.find-tool{
+    position: fixed;
+    top: 80px;
+    right: 60px;
+    height: 40px;
+    width: 40px;
+    color: #007fff;
+    font-size: 12px;
+    border: 1px solid #f1f1f1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: white;
+    box-shadow: 0 2px 8px rgb(50 50 50 / 4%);
+}
+
+.find-tool-box{
+    position: fixed;
+    top: 124px;
+    right: 60px;
+    border: 1px solid #f1f1f1;
+    background: white;
+    box-shadow: 0 2px 8px rgb(50 50 50 / 4%);
+    padding: 20px;
+}
+.find-tool-box .cell{
+    display: flex;
+    padding-bottom: 20px;
+}
+.find-tool-box .cell .label{
+    width: 40px;
+}
+.find-tool-box .cell input{
+    flex: 1;
+}
+.find-tool-box .find-btn{
+    height: 30px;
+    background: #4e6ef2;
+    color: #ffffff;
+    width: 100%;
 }

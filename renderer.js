@@ -30,7 +30,7 @@ function updateURL(ifm, url){
 // 改变 iframe的 高度
 function changeFrameHeight(){
     var ifm= document.getElementById("iframe");
-      ifm.height=document.documentElement.clientHeight-48;
+      ifm.height=document.documentElement.clientHeight-52;
 }
 
 window.addEventListener('resize', function(){
