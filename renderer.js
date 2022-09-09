@@ -29,8 +29,7 @@ function updateURL(ifm, url){
 
 // 改变 iframe的 高度
 function changeFrameHeight(){
-    var ifm= document.getElementById("iframe");
-      ifm.height=document.documentElement.clientHeight-52;
+    ifm.height=document.documentElement.clientHeight-52;
 }
 
 window.addEventListener('resize', function(){
@@ -40,4 +39,38 @@ window.addEventListener('resize', function(){
 // 搜索方法
 function onSearch(){
     updateURL(ifm,input.value)
+}
+
+var boxState = false;
+var findBox = null; // 查找弹窗
+function showFind(){
+   findBox = document.getElementsByClassName('find-tool-box')[0]
+   findBox.style.display = !boxState? "block":"none";
+   boxState = !boxState;
+}
+
+// 查找节点
+function onFind(){
+   var nodeInput = document.getElementById("node-input");
+   var jsonInput = document.getElementById("json-input");
+   var nodeList = []
+   console.log(nodeInput.value)
+   console.log(jsonInput.value)
+   if(nodeInput.value){
+     nodeList =nodeInput.value.split('->')
+     locateNode(nodeList)
+   }else if(jsonInput.value){
+     try{
+        var jsonData = JSON.parse(jsonInput.value)
+        nodeList = jsonData.selector.split('->')
+        locateNode(nodeList)
+     }catch(e){
+
+     }
+   }
+}
+
+// 定位节点
+function locateNode(arr){
+   console.log(arr)
 }

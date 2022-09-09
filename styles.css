@@ -54,6 +54,7 @@ button{
 }
 
 .find-tool-box{
+    display: none;
     position: fixed;
     top: 124px;
     right: 60px;

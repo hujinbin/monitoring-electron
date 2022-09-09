@@ -17,19 +17,19 @@
         frameborder="0"
         onload="changeFrameHeight()">
       </iframe>
-      <div class="find-tool">
+      <div class="find-tool" onclick="showFind()">
          查找
       </div>
       <div class="find-tool-box">
           <div class="cell">
             <div class="label">节点</div>
-            <input placeholder="请输入">
+            <input id='node-input' placeholder="请输入" />
           </div>
           <div class="cell">
             <div class="label">json</div>
-            <input placeholder="请输入">
+            <textarea id='json-input' placeholder="请输入"></textarea>
           </div>
-          <button class="find-btn" onclick="onSearch()">查找</button>
+          <button class="find-btn" onclick="onFind()">查找</button>
       </div>
     </div>
 
