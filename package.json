@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/hujinbin/monitoring-electron/issues"
   },
-  "homepage": "https://github.com/hujinbin/monitoring-electron#readme"
+  "homepage": "https://github.com/hujinbin/monitoring-electron#readme",
+  "dependencies": {
+    "@electron/remote": "^2.0.8"
+  }
 }

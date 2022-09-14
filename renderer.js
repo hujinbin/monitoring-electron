@@ -72,5 +72,11 @@ function onFind(){
 
 // 定位节点
 function locateNode(arr){
-   console.log(arr)
+  console.log(ifm)
+   let dom = ifm.contentWindow.document || ifm.document
+   arr.forEach(element => {
+      console.log(dom)
+      dom = dom.querySelector(element)
+      console.log(dom)
+   });
 }

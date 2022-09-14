@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, BrowserView} = require('electron')
 const path = require('path')
 
 function createWindow () {
@@ -7,25 +7,53 @@ function createWindow () {
   const mainWindow = new BrowserWindow({
     width: 1240,
     height: 600,
+    useContentSize: true,
     webPreferences: {
+      nodeIntegration: true, //设置开启nodejs环境
+      contextIsolation: false,
       preload: path.join(__dirname, 'preload.js')
     }
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  
 
-  mainWindow.webContents.session.webRequest.onHeadersReceived({ urls: [ "*://*/*" ] },
-    (d, c)=>{
-      if(d.responseHeaders['X-Frame-Options']){
-        delete d.responseHeaders['X-Frame-Options'];
-      } else if(d.responseHeaders['x-frame-options']) {
-        delete d.responseHeaders['x-frame-options'];
-      }
+  // mainWindow.webContents.session.webRequest.onHeadersReceived({ urls: [ "*://*/*" ] },
+  //   (d, c)=>{
+  //     if(d.responseHeaders['X-Frame-Options']){
+  //       delete d.responseHeaders['X-Frame-Options'];
+  //     } else if(d.responseHeaders['x-frame-options']) {
+  //       delete d.responseHeaders['x-frame-options'];
+  //     }
  
-      c({cancel: false, responseHeaders: d.responseHeaders});
-    }
-  );
+  //     c({cancel: false, responseHeaders: d.responseHeaders});
+  //   }
+  // );
+    require('@electron/remote/main').initialize()
+    require('@electron/remote/main').enable(mainWindow.webContents)
+    mainWindow.loadFile('index.html')
+    mainWindow.webContents.openDevTools()
+
+    // 使用windowsView 打开子窗口
+    const view = new BrowserView()
+    mainWindow.setBrowserView(view)
+    view.setBounds({
+        x:0,
+        y:80,
+        width:1240,
+        height:600,
+    })
+    view.webContents.loadURL('https://ops.ydctml.top/')
+
+    mainWindow.on('will-resize', function () {
+      const size = mainWindow.getSize()
+      view.setBounds({
+        x:0,
+        y:80,
+        width:size[0],
+        height:size[1],
+      })
+   })
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }
