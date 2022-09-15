@@ -36,9 +36,6 @@ button{
 }
 
 .find-tool{
-    position: fixed;
-    top: 80px;
-    right: 60px;
     height: 40px;
     width: 40px;
     color: #007fff;

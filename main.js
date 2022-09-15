@@ -11,7 +11,7 @@ function createWindow () {
     webPreferences: {
       nodeIntegration: true, //设置开启nodejs环境
       contextIsolation: false,
-      preload: path.join(__dirname, 'preload.js')
+      enableRemoteModule: true, 
     }
   })
 
@@ -69,6 +69,7 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
+
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
