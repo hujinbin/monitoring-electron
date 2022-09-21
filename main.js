@@ -31,10 +31,10 @@ function createWindow () {
   // );
     require('@electron/remote/main').initialize()
     require('@electron/remote/main').enable(mainWindow.webContents)
-    mainWindow.loadFile('index.html')
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
 
     // 使用windowsView 打开子窗口
+    const searchView = new BrowserView()
     const view = new BrowserView()
     mainWindow.setBrowserView(view)
     view.setBounds({
@@ -45,6 +45,17 @@ function createWindow () {
     })
     view.webContents.loadURL('https://ops.ydctml.top/')
 
+    mainWindow.addBrowserView(searchView)
+    searchView.setBounds({
+      x:0,
+      y:0,
+      width:1240,
+      height:80,
+      // height:600,
+    })
+    searchView.webContents.loadFile('index.html')
+    searchView.webContents.openDevTools()
+
     mainWindow.on('will-resize', function () {
       const size = mainWindow.getSize()
       view.setBounds({
@@ -52,6 +63,12 @@ function createWindow () {
         y:80,
         width:size[0],
         height:size[1],
+      })
+      searchView.setBounds({
+        x:0,
+        y:0,
+        width:size[0],
+        height:80,
       })
    })
   // Open the DevTools.

@@ -72,7 +72,6 @@ function onFind(){
 
 // 定位节点
 function locateNode(arr){
-  console.log(ifm)
    let dom = ifm.contentWindow.document || ifm.document
    arr.forEach(element => {
       console.log(dom)
