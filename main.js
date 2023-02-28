@@ -2,9 +2,13 @@
 const {app, BrowserWindow, BrowserView} = require('electron')
 const path = require('path')
 
+const { ipcMain } = require('electron')
+
+let mainWindow = null
+
 function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 1240,
     height: 600,
     useContentSize: true,
@@ -39,7 +43,8 @@ function createWindow () {
     mainWindow.setBrowserView(view)
     view.setBounds({
         x:0,
-        y:80,
+        // y:80,
+        y:400,
         width:1240,
         height:600,
     })
@@ -50,10 +55,15 @@ function createWindow () {
       x:0,
       y:0,
       width:1240,
-      height:80,
-      // height:600,
+      // height:80,
+      height:400,
+      webPreferences: {
+        nodeIntegration: true, //设置开启nodejs环境
+        contextIsolation: false,
+        enableRemoteModule: true, 
+      }
     })
-    searchView.webContents.loadFile('index.html')
+    searchView.webContents.loadFile(path.join(__dirname, 'index.html'))
     searchView.webContents.openDevTools()
 
     mainWindow.on('will-resize', function () {
@@ -71,6 +81,10 @@ function createWindow () {
         height:80,
       })
    })
+   ipcMain.on("onSearch", (event, data) => {
+    //监听主进程发送过来的消息
+    console.log(event, data)
+  })
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 }

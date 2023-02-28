@@ -1,29 +1,27 @@
-// This file is required by the index.html file and will
-// be executed in the renderer process for that window.
-// No Node.js APIs are available in this process because
-// `nodeIntegration` is turned off. Use `preload.js` to
-// selectively enable features needed in the rendering
-// process.
+const { ipcRenderer } = require('@electron/remote');
+const ipc = ipcRenderer;
+
+
 var input = null
-var ifm = null
+console.log(window)
 window.addEventListener('DOMContentLoaded', () => {
+  console.log(1111111111111)
     input = document.getElementById("search-input");
-    ifm = document.getElementById("iframe");
     input.addEventListener("keydown", function(evt){
       if(evt.key==="Enter"){    //当按下回车键时
-        updateURL(ifm,input.value)
+        updateURL(input.value)
       }
     })
   })
   
-function updateURL(ifm, url){
+function updateURL(url){
     if(url === ''){
         return false;
     }
     if (url.slice(0, 8).toLowerCase() != 'https://' 
       && url.slice(0, 7).toLowerCase() != 'http://')
       url = 'https://'+ url;
-    ifm.src = url   //更新ifm的地址
+    return url  //返回url
 }
 
 
@@ -38,7 +36,11 @@ window.addEventListener('resize', function(){
 
 // 搜索方法
 function onSearch(){
-    updateURL(ifm,input.value)
+    input = document.getElementById("search-input");
+    const url = updateURL(input.value)
+    console.log(url)
+    console.log(2222222)
+    ipc.send('onSearch',url)
 }
 
 var boxState = false;
