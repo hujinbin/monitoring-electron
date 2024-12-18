@@ -1,45 +1,57 @@
 appId: com.electron.app
 productName: electron-app
-directories:
-  buildResources: build
+
 files:
-  - '!**/.vscode/*'
-  - '!src/*'
-  - '!electron.vite.config.{js,ts,mjs,cjs}'
-  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
-  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
-  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
-asarUnpack:
+  - build/**
+  - out/**
   - resources/**
-win:
-  executableName: electron-app
+  - src/**
+  - package.json
+
+
 nsis:
-  artifactName: ${name}-${version}-setup.${ext}
-  shortcutName: ${productName}
-  uninstallDisplayName: ${productName}
-  createDesktopShortcut: always
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  deleteAppDataOnUninstall: false
+  installerIcon: ./build/icon.ico
+  uninstallerIcon: ./build/icon.ico
+  installerHeaderIcon: ./build/icon.ico
+  shortcutName: monitoring-electron
+  unicode: true
+  perMachine: true
+
+
+
+win:
+  target:
+    - target: nsis
+      arch: x64
+  icon: ./build/icon.ico
+  signAndEditExecutable: false
+
 mac:
-  entitlementsInherit: build/entitlements.mac.plist
-  extendInfo:
-    - NSCameraUsageDescription: Application requests access to the device's camera.
-    - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
-    - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
-    - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
-  notarize: false
-dmg:
-  artifactName: ${name}-${version}.${ext}
+  target: dmg
+  icon: ./build/icon.ico
+
 linux:
   target:
-    - AppImage
-    - snap
-    - deb
-  maintainer: electronjs.org
-  category: Utility
-appImage:
-  artifactName: ${name}-${version}.${ext}
-npmRebuild: false
+    - target: AppImage
+      arch: x64
+  icon: ./build/icon.ico
+
+
+directories:
+  buildResources: build
+  output: dist
+
+extraFiles:
+  - out/main/index.js
+
 publish:
   provider: generic
   url: https://example.com/auto-updates
+
 electronDownload:
   mirror: https://npmmirror.com/mirrors/electron/
